@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://nxjf3cb7pj2"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=666455186]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=740995507]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=625477391]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1304993543]
+
+[node name="RayCast3D (front left)" type="RayCast3D" parent="Node3D" unique_id=250138238]
+
+[node name="RayCast3D (front right)" type="RayCast3D" parent="Node3D" unique_id=663893359]
+
+[node name="RayCast3D (back left)" type="RayCast3D" parent="Node3D" unique_id=1428576106]
+
+[node name="RayCast3D (back right)" type="RayCast3D" parent="Node3D" unique_id=1706557389]
