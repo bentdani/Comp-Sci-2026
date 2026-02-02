@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://bg0m7nfch4tcj"]
 
 [sub_resource type="Curve3D" id="Curve3D_tsduo"]
-bake_interval = 273.59
+closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, -10, 0, 0, 0, 0, 0, 0, 20, 0, -20, 0, 0, 0, 0, 0, 0, -20, 0, -20, 0, 0, 0, 0, 0, 0, -30, 0, -10, 0, 0, 0, 0, 0, 0, -20, 0, 0),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, -10, 0, 0, 0, 0, 0, 0, 20, 0, -20, 0, 0, 0, 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, -20, 0, -20, 0, 0, 0, 0, 0, 0, -30, 0, -10, 0, 0, 0, 0, 0, 0, -20, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 7
+point_count = 8
 
 [node name="Test_Track" type="Node3D" unique_id=1343111486]
 
 [node name="Path3D" type="Path3D" parent="." unique_id=873268281]
 curve = SubResource("Curve3D_tsduo")
-debug_custom_color = Color(0.8259186, 4.813075e-07, 0.40986177, 1)
+debug_custom_color = Color(0.44955862, 0.79677474, 0.65652627, 1)
