@@ -1,1 +1,1 @@
-# Comp-Sci-2026
+# Computer-Science-2026
