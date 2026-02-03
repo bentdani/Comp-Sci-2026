@@ -1,3 +1,17 @@
 [gd_scene format=3 uid="uid://bg0m7nfch4tcj"]
 
+[ext_resource type="PackedScene" uid="uid://6sobhl62rb1n" path="res://ImageToStl.com_canada-f1-track-1.glb" id="1_7ehuj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3hn85"]
+friction = 0.5
+
 [node name="Test_Track" type="Node3D" unique_id=1343111486]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=230742142]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_3hn85")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1433058475]
+
+[node name="Track" parent="StaticBody3D" unique_id=2028853218 instance=ExtResource("1_7ehuj")]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 59.721004, 0, -45.609222)
