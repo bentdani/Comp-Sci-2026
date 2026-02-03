@@ -1,36 +1,70 @@
 [gd_scene format=3 uid="uid://nxjf3cb7pj2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsowa"]
-size = Vector3(1.3022461, 0.76123047, 3.4836426)
+size = Vector3(1.4, 0.6, 4.5)
 
-[node name="Player_Car" type="CharacterBody3D" unique_id=666455186]
+[sub_resource type="BoxMesh" id="BoxMesh_hsowa"]
+size = Vector3(1.4, 0.6, 4.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5orbf"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 0.4
+
+[node name="Player_Car" type="RigidBody3D" unique_id=1093207572]
+mass = 798.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.2, 0)
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=740995507]
-transform = Transform3D(0.99944675, 0, 0.03325984, 0, 1, 0, -0.03325984, 0, 0.99944675, 0.5214866, -0.36020994, -1.4230374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_hsowa")
+debug_color = Color(1, 1, 1, 0.41960785)
 
 [node name="Look_At_Node" type="Node3D" parent="." unique_id=1786787273]
 
 [node name="Car_Mesh" type="MeshInstance3D" parent="Look_At_Node" unique_id=625477391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_hsowa")
 
 [node name="Wheels" type="Node3D" parent="Look_At_Node" unique_id=929882272]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Look_At_Node/Wheels" unique_id=64951328]
+[node name="FrontLeft_Steer" type="Node3D" parent="Look_At_Node/Wheels" unique_id=1948282829]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Look_At_Node/Wheels" unique_id=2133065042]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Look_At_Node/Wheels/FrontLeft_Steer" unique_id=64951328]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.8899585, 0, -1.4952725)
+mesh = SubResource("CylinderMesh_5orbf")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Look_At_Node/Wheels" unique_id=1363894245]
+[node name="FrontRight_Steer" type="Node3D" parent="Look_At_Node/Wheels" unique_id=890635446]
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Look_At_Node/Wheels" unique_id=796383694]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Look_At_Node/Wheels/FrontRight_Steer" unique_id=1553039904]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.9043542, 0, -1.4719024)
+mesh = SubResource("CylinderMesh_5orbf")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Look_At_Node/Wheels" unique_id=803389807]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.88877404, 0, 1.7955014)
+mesh = SubResource("CylinderMesh_5orbf")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Look_At_Node/Wheels" unique_id=1044639023]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.89403856, 0, 1.8016119)
+mesh = SubResource("CylinderMesh_5orbf")
 
 [node name="Suspension" type="Node3D" parent="." unique_id=1304993543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5685281, 0.36020994, 1.4049056)
 
 [node name="RayCast3D (front left)" type="RayCast3D" parent="Suspension" unique_id=250138238]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9962554, 0.08646026, 0, -0.08646026, 0.99625546, -0.08175701, 0, -3.0819488)
+target_position = Vector3(0, -1.2, 0)
 
 [node name="RayCast3D (front right)" type="RayCast3D" parent="Suspension" unique_id=663893359]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12668514, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2238883, 0, -3.1316028)
+target_position = Vector3(0, -1.2, 0)
 
 [node name="RayCast3D (back left)" type="RayCast3D" parent="Suspension" unique_id=1428576106]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07265073, 0, 0.52831316)
+target_position = Vector3(0, -1.2, 0)
 
 [node name="RayCast3D (back right)" type="RayCast3D" parent="Suspension" unique_id=1706557389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2299094, 0, 0.5603107)
+target_position = Vector3(0, -1.2, 0)
