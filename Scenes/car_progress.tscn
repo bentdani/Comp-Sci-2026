@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://j7d0meepywq6"]
+
+[ext_resource type="Script" uid="uid://bg2oift6sethx" path="res://Scenes/car_progress.gd" id="1_m3fsn"]
+
+[node name="CarProgress" type="Node3D" unique_id=2133777312]
+script = ExtResource("1_m3fsn")
