@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://bg0m7nfch4tcj"]
 
+[ext_resource type="Script" uid="uid://do3kglk2uiju" path="res://Scripts/track.gd" id="1_7ehuj"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43jps"]
 resource_name = "x1"
 cull_mode = 2
@@ -52,10 +54,10 @@ _data = {
 point_count = 15
 
 [node name="Test_Track" type="Node3D" unique_id=1343111486]
+script = ExtResource("1_7ehuj")
 
 [node name="Node1" type="MeshInstance3D" parent="." unique_id=1757415488]
 transform = Transform3D(-0.85716736, 0, -0.51503795, 0, 0.01, 0, 0.51503795, 0, -0.85716736, 0, 0, 0)
-visible = false
 mesh = SubResource("ArrayMesh_tsduo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Node1" unique_id=1104823641]
