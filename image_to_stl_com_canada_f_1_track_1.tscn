@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c35ukvovn5nxc"]
+
+[ext_resource type="PackedScene" uid="uid://6sobhl62rb1n" path="res://ImageToStl.com_canada-f1-track-1.glb" id="1_fcuf8"]
+
+[node name="ImageToStl_com_canada-f1-track-1" unique_id=1902152974 instance=ExtResource("1_fcuf8")]
