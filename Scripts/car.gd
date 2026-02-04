@@ -6,15 +6,15 @@ extends RigidBody3D
 @export var spring_damping: float = 30.0       # Anti-bounce
 
 @onready var rays = [
-	$SuspensionRays/RayFrontLeft, 
-	$SuspensionRays/RayFrontRight, 
-	$SuspensionRays/RayBackLeft, 
-	$SuspensionRays/RayBackRight
+	$"Suspension/RayCast3D (front left)", 
+	$"Suspension/RayCast3D (front right)", 
+	$"Suspension/RayCast3D (back left)", 
+	$"Suspension/RayCast3D (back right)"
 ]
 
 func _physics_process(_delta):
 	for ray in rays:
-		if ray.is_colliding():wdadadw
+		if ray.is_colliding():
 			# Calculate the "spring" math
 			var collision_point = ray.get_collision_point()
 			var distance = (ray.global_transform.origin - collision_point).length()

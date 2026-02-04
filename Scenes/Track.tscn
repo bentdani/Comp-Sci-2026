@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bg0m7nfch4tcj"]
 
-[ext_resource type="Script" uid="uid://do3kglk2uiju" path="res://Scripts/track.gd" id="1_7ehuj"]
+[ext_resource type="Script" uid="uid://d15fmoioqrobc" path="res://Scripts/Track.gd" id="1_7ehuj"]
+[ext_resource type="PackedScene" uid="uid://nxjf3cb7pj2" path="res://Scenes/Car.tscn" id="2_3hn85"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43jps"]
 resource_name = "x1"
@@ -71,3 +72,6 @@ debug_color = Color(0.98843485, 0.10650497, 0, 0.41960785)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.706, 0.13, -16.09)
 rotation_order = 0
 curve = SubResource("Curve3D_tsduo")
+
+[node name="Player_Car" parent="." unique_id=1093207572 instance=ExtResource("2_3hn85")]
+transform = Transform3D(-0.8571673, 0, -0.5150379, 0, 0.01, 0, 0.5150379, 0, -0.8571673, 0, 0, 0)
