@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://bg0m7nfch4tcj"]
 
 [ext_resource type="Script" uid="uid://d15fmoioqrobc" path="res://Scripts/Track.gd" id="1_7ehuj"]
-[ext_resource type="Script" uid="uid://d15fmoioqrobc" path="res://Scripts/track.gd" id="1_7ehuj"]
 [ext_resource type="PackedScene" uid="uid://nxjf3cb7pj2" path="res://Scenes/Car.tscn" id="2_3hn85"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3hn85"]
@@ -83,7 +82,6 @@ shadow_enabled = true
 directional_shadow_max_distance = 1.0
 
 [node name="Node1" type="MeshInstance3D" parent="." unique_id=1757415488]
-transform = Transform3D(-0.85716736, 0, -0.51503795, 0, 0.01, 0, 0.51503795, 0, -0.85716736, 0, 0, 0)
 transform = Transform3D(-8.571673, 0, -5.15038, 0, 0.1, 0, 5.15038, 0, -8.571673, 0, 0, 0)
 mesh = SubResource("ArrayMesh_tsduo")
 
@@ -100,5 +98,4 @@ visible = false
 curve = SubResource("Curve3D_tsduo")
 
 [node name="Player_Car" parent="." unique_id=1093207572 instance=ExtResource("2_3hn85")]
-transform = Transform3D(-0.8571673, 0, -0.5150379, 0, 0.01, 0, 0.5150379, 0, -0.8571673, 0, 0, 0)
 transform = Transform3D(-0.51514286, 0, -0.8571043, 0, 1, 0, 0.8571043, 0, -0.51514286, 0, 3.6685486, 344.68323)
