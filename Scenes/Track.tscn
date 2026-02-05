@@ -98,4 +98,4 @@ visible = false
 curve = SubResource("Curve3D_tsduo")
 
 [node name="Player_Car" parent="." unique_id=1093207572 instance=ExtResource("2_3hn85")]
-transform = Transform3D(-0.51514286, 0, -0.8571043, 0, 1, 0, 0.8571043, 0, -0.51514286, 0, 3.6685486, 344.68323)
+transform = Transform3D(-0.18974662, 0.051350947, -0.9804893, 0, 0.9986315, 0.052301105, 0.9818332, 0.009923958, -0.18948695, 0, 2.1015596, 349.2785)

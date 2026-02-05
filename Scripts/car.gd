@@ -6,7 +6,7 @@ extends RigidBody3D
 @export var spring_damping: float = 30.0
 
 @export_group("Driving")
-@export var engine_force: float = 10000.0
+@export var engine_force: float = 90000.0
 @export var steering_limit: float = 0.1 # About 30 degrees
 @export var grip_strength: float = 5.0  # Keeps the car from sliding sideways
 
