@@ -6,8 +6,8 @@ extends RigidBody3D
 @export var spring_damping: float = 30.0
 
 @export_group("Driving")
-@export var engine_force: float = 90000.0
-@export var steering_limit: float = 0.1 # About 30 degrees
+@export var engine_force: float = 14000.0
+@export var steering_limit: float = 0.15
 @export var grip_strength: float = 5.0  # Keeps the car from sliding sideways
 
 @onready var rays = [
@@ -64,3 +64,11 @@ func _physics_process(_delta):
 			var side_velocity = right_dir.dot(tire_velocity)
 			var grip_force = -side_velocity * grip_strength * (mass / 4.0)
 			apply_force(right_dir * grip_force, ray_relative_pos)
+			
+			# Simple Anti-Roll Logic
+			var left_dist = ($"Suspension/RayCast3D (front left)".get_collision_point() - $"Suspension/RayCast3D (front left)".global_transform.origin).length()
+			var right_dist = ($"Suspension/RayCast3D (front right)".get_collision_point() - $"Suspension/RayCast3D (front right)".global_transform.origin).length()
+
+			var roll_force = (left_dist - right_dist) * 500.0 # Adjust 500.0 to change stiffness
+			apply_force(Vector3.UP * roll_force, $"Suspension/RayCast3D (front left)".position)
+			apply_force(Vector3.UP * -roll_force, $"Suspension/RayCast3D (front right)".position)
