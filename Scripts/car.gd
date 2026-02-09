@@ -17,6 +17,14 @@ extends RigidBody3D
 	$"Suspension/RayCast3D (back right)"
 ]
 
+@onready var wheels = [
+	$Look_At_Node/Wheels/FrontLeft_Steer/MeshInstance3D,
+	$Look_At_Node/Wheels/FrontRight_Steer/MeshInstance3D3,
+	$Look_At_Node/Wheels/MeshInstance3D5,
+	$Look_At_Node/Wheels/MeshInstance3D6,
+	$Look_At_Node/Wheels/MeshInstance3D6/MeshInstance3D
+]
+
 # Nodes for visual steering
 @onready var front_left_pivot = $Look_At_Node/Wheels/FrontLeft_Steer
 @onready var front_right_pivot = $Look_At_Node/Wheels/FrontRight_Steer
@@ -72,3 +80,17 @@ func _physics_process(_delta):
 			var roll_force = (left_dist - right_dist) * 500.0 # Adjust 500.0 to change stiffness
 			apply_force(Vector3.UP * roll_force, $"Suspension/RayCast3D (front left)".position)
 			apply_force(Vector3.UP * -roll_force, $"Suspension/RayCast3D (front right)".position)
+
+	var speed = linear_velocity.dot(-global_transform.basis.z)
+	var wheel_spin = (speed / 0.35) * _delta
+	
+	for wheel in wheels:
+		if wheel:
+			wheel.rotate_x(wheel_spin)
+	
+	var steering_velocity_multiplier = clamp(1.0 - (abs(speed) / 50.0), 0.2, 1.0)
+	var final_steer_angle = steer_input * steering_limit * steering_velocity_multiplier
+
+	# Smoothly rotate the steering pivots
+	front_left_pivot.rotation.y = lerp(front_left_pivot.rotation.y, final_steer_angle, 0.1)
+	front_right_pivot.rotation.y = lerp(front_right_pivot.rotation.y, final_steer_angle, 0.1)
