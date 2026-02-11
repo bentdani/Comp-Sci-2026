@@ -6,9 +6,10 @@ extends RigidBody3D
 @export var spring_damping: float = 30.0
 
 @export_group("Driving")
-@export var engine_force: float = 14000.0
-@export var steering_limit: float = 0.15
+@export var engine_force: float = 24000.0
+@export var steering_limit: float = 0.07
 @export var grip_strength: float = 5.0  # Keeps the car from sliding sideways
+@export var downforce_stiffness: float = 10.0 # Start here and increase if still flipping
 
 @onready var rays = [
 	$"Suspension/RayCast3D (front left)", 
@@ -21,8 +22,7 @@ extends RigidBody3D
 	$Look_At_Node/Wheels/FrontLeft_Steer/MeshInstance3D,
 	$Look_At_Node/Wheels/FrontRight_Steer/MeshInstance3D3,
 	$Look_At_Node/Wheels/MeshInstance3D5,
-	$Look_At_Node/Wheels/MeshInstance3D6,
-	$Look_At_Node/Wheels/MeshInstance3D6/MeshInstance3D
+	$Look_At_Node/Wheels/MeshInstance3D6
 ]
 
 # Nodes for visual steering
@@ -94,3 +94,10 @@ func _physics_process(_delta):
 	# Smoothly rotate the steering pivots
 	front_left_pivot.rotation.y = lerp(front_left_pivot.rotation.y, final_steer_angle, 0.1)
 	front_right_pivot.rotation.y = lerp(front_right_pivot.rotation.y, final_steer_angle, 0.1)
+
+	var current_speed = linear_velocity.length()
+	# We calculate a force pointing "down" relative to the car's floor
+	var down_direction = -global_transform.basis.y 
+	var final_downforce = down_direction * current_speed * downforce_stiffness
+
+	apply_central_force(final_downforce)

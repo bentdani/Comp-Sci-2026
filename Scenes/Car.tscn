@@ -57,13 +57,10 @@ top_radius = 0.35
 bottom_radius = 0.35
 height = 0.4
 
-[sub_resource type="BoxMesh" id="BoxMesh_8tfcp"]
-size = Vector3(0.5, 0.5, 0.5)
-
 [node name="Player_Car" type="RigidBody3D" unique_id=1093207572]
-mass = 798.0
+mass = 1500.0
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.2, 0)
+center_of_mass = Vector3(0, -0.8, 0)
 can_sleep = false
 script = ExtResource("1_5orbf")
 
@@ -108,10 +105,6 @@ surface_material_override/0 = ExtResource("2_8tfcp")
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.8, 0.35, 1.8)
 mesh = SubResource("CylinderMesh_5orbf")
 surface_material_override/0 = ExtResource("2_8tfcp")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Look_At_Node/Wheels/MeshInstance3D6" unique_id=1592568158]
-transform = Transform3D(-4.3711392e-08, 0.09188399, 0.99576986, -1, -4.0163766e-09, -4.3526484e-08, -5.3290705e-15, -0.99576986, 0.09188399, 0.0014809072, -0.06733078, 0.014315963)
-mesh = SubResource("BoxMesh_8tfcp")
 
 [node name="Suspension" type="Node3D" parent="." unique_id=1304993543]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5685281, 0.36020994, 1.4049056)
