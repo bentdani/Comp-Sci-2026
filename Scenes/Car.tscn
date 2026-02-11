@@ -117,11 +117,11 @@ mesh = SubResource("BoxMesh_8tfcp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5685281, 0.36020994, 1.4049056)
 
 [node name="RayCast3D (front left)" type="RayCast3D" parent="Suspension" unique_id=250138238]
-transform = Transform3D(1, 0, 0, 0, 0.9962554, 0.08646026, 0, -0.08646026, 0.99625546, -0.08175701, 0, -3.0819488)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, -3.1)
 target_position = Vector3(0, -1.5, 0)
 
 [node name="RayCast3D (front right)" type="RayCast3D" parent="Suspension" unique_id=663893359]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2238883, 0, -3.1316028)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.224, 0, -3.1)
 target_position = Vector3(0, -1.5, 0)
 
 [node name="RayCast3D (back left)" type="RayCast3D" parent="Suspension" unique_id=1428576106]
