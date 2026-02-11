@@ -58,7 +58,9 @@ bottom_radius = 0.35
 height = 0.4
 
 [node name="Player_Car" type="RigidBody3D" unique_id=1093207572]
-mass = 1500.0
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+mass = 3000.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.8, 0)
 can_sleep = false
@@ -69,7 +71,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9561464, 0.29288906, 0, -0.29288906, 0.956
 keep_aspect = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=740995507]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00957039, 0.42, -0.29432812)
 shape = SubResource("BoxShape3D_hsowa")
 debug_color = Color(1, 1, 1, 0.41960785)
 
@@ -83,6 +84,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_5orbf")
 [node name="Wheels" type="Node3D" parent="Look_At_Node" unique_id=929882272]
 
 [node name="FrontLeft_Steer" type="Node3D" parent="Look_At_Node/Wheels" unique_id=1948282829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Look_At_Node/Wheels/FrontLeft_Steer" unique_id=64951328]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.8, 0.35, -1.665)
@@ -90,6 +92,7 @@ mesh = SubResource("CylinderMesh_5orbf")
 surface_material_override/0 = ExtResource("2_8tfcp")
 
 [node name="FrontRight_Steer" type="Node3D" parent="Look_At_Node/Wheels" unique_id=890635446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Look_At_Node/Wheels/FrontRight_Steer" unique_id=1553039904]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.8, 0.35, -1.7)
@@ -110,17 +113,17 @@ surface_material_override/0 = ExtResource("2_8tfcp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5685281, 0.36020994, 1.4049056)
 
 [node name="RayCast3D (front left)" type="RayCast3D" parent="Suspension" unique_id=250138238]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, -3.1)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, -1.25, 0, -3.1)
 target_position = Vector3(0, -1.5, 0)
 
 [node name="RayCast3D (front right)" type="RayCast3D" parent="Suspension" unique_id=663893359]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.224, 0, -3.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, -3.1)
 target_position = Vector3(0, -1.5, 0)
 
 [node name="RayCast3D (back left)" type="RayCast3D" parent="Suspension" unique_id=1428576106]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07265073, 0, 0.52831316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 0.5)
 target_position = Vector3(0, -1.5, 0)
 
 [node name="RayCast3D (back right)" type="RayCast3D" parent="Suspension" unique_id=1706557389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2299094, 0, 0.5603107)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 0.5)
 target_position = Vector3(0, -1.5, 0)

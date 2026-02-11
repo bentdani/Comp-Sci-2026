@@ -6,8 +6,8 @@ extends RigidBody3D
 @export var spring_damping: float = 30.0
 
 @export_group("Driving")
-@export var engine_force: float = 24000.0
-@export var steering_limit: float = 0.07
+@export var engine_force: float = 48000.0
+@export var steering_limit: float = 0.15
 @export var grip_strength: float = 5.0  # Keeps the car from sliding sideways
 @export var downforce_stiffness: float = 10.0 # Start here and increase if still flipping
 

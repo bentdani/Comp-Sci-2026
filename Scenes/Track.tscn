@@ -85,7 +85,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 1.0
 
 [node name="Node1" type="MeshInstance3D" parent="." unique_id=1757415488]
-transform = Transform3D(-17.143347, 0, -10.30076, 0, 0.2, 0, 10.30076, 0, -17.143347, 0, 0, 0)
+transform = Transform3D(-17.143347, 0, -10.30076, 0, 0.2, 0, 10.30076, 0, -17.143347, 0, -107.96101, 0)
 mesh = SubResource("ArrayMesh_tsduo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Node1" unique_id=1104823641]
@@ -101,10 +101,10 @@ visible = false
 curve = SubResource("Curve3D_tsduo")
 
 [node name="Player_Car" parent="." unique_id=1093207572 instance=ExtResource("2_3hn85")]
-transform = Transform3D(-0.2990408, 0, -0.9542403, 0, 1.0000001, 0, 0.95424044, 0, -0.29904076, 0, 5.551633, 710.4577)
+transform = Transform3D(-0.2990408, 0, -0.9542403, 0, 1.0000001, 0, 0.95424044, 0, -0.29904076, 0, 5.551633, -772.4153)
 
 [node name="delete" type="Area3D" parent="." unique_id=1934479692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.44994, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -672.9085, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="delete" unique_id=2097594611]
 shape = SubResource("BoxShape3D_3hn85")
