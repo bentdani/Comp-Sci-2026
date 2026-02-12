@@ -2,14 +2,14 @@ extends RigidBody3D
 
 @export_group("Suspension")
 @export var suspension_rest_dist: float = 0.6
-@export var spring_strength: float = 400.0
-@export var spring_damping: float = 30.0
+@export var spring_strength: float = 500.0 # Bumped up for stability
+@export var spring_damping: float = 40.0
 
 @export_group("Driving")
-@export var engine_force: float = 48000.0
-@export var steering_limit: float = 0.15
-@export var grip_strength: float = 5.0  # Keeps the car from sliding sideways
-@export var downforce_stiffness: float = 10.0 # Start here and increase if still flipping
+@export var engine_force: float = 12000.0 # Reduced: applied per wheel
+@export var steering_limit: float = 0.5
+@export var grip_strength: float = 15.0  # Increased for snappier response
+@export var downforce: float = 20.0
 
 @onready var rays = [
 	$"Suspension/RayCast3D (front left)", 
@@ -18,86 +18,59 @@ extends RigidBody3D
 	$"Suspension/RayCast3D (back right)"
 ]
 
-@onready var wheels = [
-	$Look_At_Node/Wheels/FrontLeft_Steer/MeshInstance3D,
-	$Look_At_Node/Wheels/FrontRight_Steer/MeshInstance3D3,
-	$Look_At_Node/Wheels/MeshInstance3D5,
-	$Look_At_Node/Wheels/MeshInstance3D6
-]
+@onready var pivots = [$Look_At_Node/Wheels/FrontLeft_Steer, $Look_At_Node/Wheels/FrontRight_Steer]
 
-# Nodes for visual steering
-@onready var front_left_pivot = $Look_At_Node/Wheels/FrontLeft_Steer
-@onready var front_right_pivot = $Look_At_Node/Wheels/FrontRight_Steer
-
-func _physics_process(_delta):
-	# 1. Get Inputs
+func _physics_process(delta):
 	var accel_input = Input.get_axis("ui_down", "ui_up")
-	var steer_input = Input.get_axis("ui_right", "ui_left") # Flipped for standard steering
+	var steer_input = Input.get_axis("ui_right", "ui_left")
 
-	# 2. Visual Steering (Rotate the pivots you made yesterday)
-	front_left_pivot.rotation.y = steer_input * steering_limit
-	front_right_pivot.rotation.y = steer_input * steering_limit
+	# 1. Handle Steering Visuals & Logic
+	var steer_angle = steer_input * steering_limit
+	for p in pivots:
+		p.rotation.y = lerp(p.rotation.y, steer_angle, 0.2)
 
+	# 2. Process Each Wheel
 	for i in range(rays.size()):
 		var ray = rays[i]
 		if ray.is_colliding():
-			var collision_point = ray.get_collision_point()
-			var ray_origin = ray.global_transform.origin
-			var distance = (ray_origin - collision_point).length()
-			var ray_relative_pos = ray_origin - global_transform.origin
+			var force_pos = ray.get_collision_point() - global_position
+			var ray_dir = -ray.global_transform.basis.y # Gravity direction
 			
-			# Velocity at this specific wheel
-			var tire_velocity = linear_velocity + angular_velocity.cross(ray_relative_pos)
+			# Current velocity at the point where the wheel touches ground
+			var point_vel = linear_velocity + angular_velocity.cross(force_pos)
 			
-			# --- SUSPENSION FORCE ---
-			var spring_dir = ray.global_transform.basis.y
-			var offset = suspension_rest_dist - distance
-			var velocity_on_spring_axis = spring_dir.dot(tire_velocity)
-			var s_force = (offset * spring_strength) - (velocity_on_spring_axis * spring_damping)
-			apply_force(spring_dir * s_force, ray_relative_pos)
+			# --- 1. SUSPENSION ---
+			var dist = (ray.global_transform.origin - ray.get_collision_point()).length()
+			var spring_depth = suspension_rest_dist - dist
+			var spring_vel = ray_dir.dot(point_vel)
+			var total_spring_force = (spring_depth * spring_strength) - (spring_vel * spring_damping)
+			
+			# Apply upward force
+			apply_force(-ray_dir * total_spring_force, force_pos)
 
-			# --- DRIVING & STEERING FORCE ---
-			# Use the front wheel pivots to decide which way to push
+			# --- 2. GRIP & STEERING ---
+			# We need to know which way the wheel is facing
 			var wheel_basis = ray.global_transform.basis
-			if i < 2: # If it's the front two wheels
-				wheel_basis = wheel_basis.rotated(Vector3.UP, steer_input * steering_limit)
+			if i < 2: # Front wheels rotate
+				wheel_basis = wheel_basis.rotated(Vector3.UP, pivots[0].rotation.y)
 			
-			var forward_dir = -wheel_basis.z # Forward is usually -Z in Godot
+			var forward_dir = -wheel_basis.z
 			var right_dir = wheel_basis.x
 			
-			# 1. Forward Acceleration
-			apply_force(forward_dir * accel_input * (engine_force / 4.0), ray_relative_pos)
+			# Sideways friction (The "Grip")
+			var side_vel = right_dir.dot(point_vel)
+			var grip_impulse = -side_vel * grip_strength * (mass / 4.0)
+			apply_force(right_dir * grip_impulse, force_pos)
 			
-			# 2. Side Friction (Grip) - Prevents sliding like ice
-			var side_velocity = right_dir.dot(tire_velocity)
-			var grip_force = -side_velocity * grip_strength * (mass / 4.0)
-			apply_force(right_dir * grip_force, ray_relative_pos)
-			
-			# Simple Anti-Roll Logic
-			var left_dist = ($"Suspension/RayCast3D (front left)".get_collision_point() - $"Suspension/RayCast3D (front left)".global_transform.origin).length()
-			var right_dist = ($"Suspension/RayCast3D (front right)".get_collision_point() - $"Suspension/RayCast3D (front right)".global_transform.origin).length()
+			# Forward Engine Force
+			if accel_input != 0:
+				apply_force(forward_dir * accel_input * (engine_force / 4.0), force_pos)
 
-			var roll_force = (left_dist - right_dist) * 500.0 # Adjust 500.0 to change stiffness
-			apply_force(Vector3.UP * roll_force, $"Suspension/RayCast3D (front left)".position)
-			apply_force(Vector3.UP * -roll_force, $"Suspension/RayCast3D (front right)".position)
+	# 3. GLOBAL DOWNFORCE (Keeps it from flying)
+	apply_central_force(Vector3.DOWN * linear_velocity.length() * downforce)
 
-	var speed = linear_velocity.dot(-global_transform.basis.z)
-	var wheel_spin = (speed / 0.35) * _delta
-	
-	for wheel in wheels:
-		if wheel:
-			wheel.rotate_x(wheel_spin)
-	
-	var steering_velocity_multiplier = clamp(1.0 - (abs(speed) / 50.0), 0.2, 1.0)
-	var final_steer_angle = steer_input * steering_limit * steering_velocity_multiplier
-
-	# Smoothly rotate the steering pivots
-	front_left_pivot.rotation.y = lerp(front_left_pivot.rotation.y, final_steer_angle, 0.1)
-	front_right_pivot.rotation.y = lerp(front_right_pivot.rotation.y, final_steer_angle, 0.1)
-
-	var current_speed = linear_velocity.length()
-	# We calculate a force pointing "down" relative to the car's floor
-	var down_direction = -global_transform.basis.y 
-	var final_downforce = down_direction * current_speed * downforce_stiffness
-
-	apply_central_force(final_downforce)
+	# 4. ANTI-FLIP (Low Center of Mass)
+	# This force pushes the car upright if it leans too far
+	var up_dir = global_transform.basis.y
+	var tilt_correction = up_dir.cross(Vector3.UP)
+	apply_torque(tilt_correction * 500.0)

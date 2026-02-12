@@ -67,8 +67,9 @@ can_sleep = false
 script = ExtResource("1_5orbf")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1247592096]
-transform = Transform3D(1, 0, 0, 0, 0.9561464, 0.29288906, 0, -0.29288906, 0.9561464, 0, 4.060329, 7.513371)
+transform = Transform3D(1, 0, 0, 0, 0.9417586, 0.33629, 0, -0.33629, 0.9417586, 0.013336182, 3.3246055, 6.1796265)
 keep_aspect = 0
+fov = 77.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=740995507]
 shape = SubResource("BoxShape3D_hsowa")
