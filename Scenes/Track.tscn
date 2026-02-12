@@ -101,7 +101,8 @@ visible = false
 curve = SubResource("Curve3D_tsduo")
 
 [node name="Player_Car" parent="." unique_id=1093207572 instance=ExtResource("2_3hn85")]
-transform = Transform3D(-0.2990408, 0, -0.9542403, 0, 1.0000001, 0, 0.95424044, 0, -0.29904076, 0, 5.551633, -772.4153)
+transform = Transform3D(-0.2990408, 0, -0.9542403, 0, 1.0000001, 0, 0.95424044, 0, -0.29904076, 0, -101.840454, -763.6096)
+engine_force = 60000.0
 
 [node name="delete" type="Area3D" parent="." unique_id=1934479692]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -672.9085, 0)
@@ -111,5 +112,9 @@ shape = SubResource("BoxShape3D_3hn85")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=79167125]
 transform = Transform3D(0.98220867, 0.07135615, -0.17370784, 0, 0.9249976, 0.37997285, 0.18779275, -0.37321264, 0.90854067, 0, 56.60489, 805.25195)
+
+[node name="Player_Car2" parent="." unique_id=739368014 instance=ExtResource("2_3hn85")]
+transform = Transform3D(-0.21444552, 0, -0.97673607, 0, 1.0000002, 0, 0.97673607, 0, -0.21444543, 10.774475, -104.41518, -763.04224)
+engine_force = 60000.0
 
 [connection signal="body_entered" from="delete" to="." method="_on_delete_body_entered"]
