@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Comp-Sci-2026"
-run/main_scene="uid://bg0m7nfch4tcj"
+run/main_scene="uid://bnoiqvmb6rqbl"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
