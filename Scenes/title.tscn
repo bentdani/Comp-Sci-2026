@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bnoiqvmb6rqbl"]
+
+[ext_resource type="Script" uid="uid://k1nj5xcv072g" path="res://Scripts/title.gd" id="1_ekrfg"]
+[ext_resource type="AudioStream" uid="uid://b21oohhw0q40o" path="res://Menu Selection Click.wav" id="4_c7ulq"]
+
+[node name="title" type="Node2D" unique_id=2091736612]
+script = ExtResource("1_ekrfg")
+
+[node name="Control" type="Control" parent="." unique_id=889251996]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=502076443]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -578.0
+offset_top = -325.0
+offset_right = 882.0
+offset_bottom = 444.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="fancyLine" type="TextureRect" parent="Control" unique_id=82109516]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 38.0
+offset_right = 1295.0
+offset_bottom = 439.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Control" unique_id=1169209885]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_top = 56.0
+offset_right = 562.0
+offset_bottom = 244.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 135
+text = "Risky Dice"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="Control" unique_id=1965448372]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_right = 400.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 85
+text = "Play"
+
+[node name="Quit" type="Button" parent="Control" unique_id=1464203269]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = 158.0
+offset_right = 401.0
+offset_bottom = 292.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 85
+text = "Quit"
+
+[node name="Click" type="AudioStreamPlayer2D" parent="." unique_id=185384784]
+stream = ExtResource("4_c7ulq")
+volume_db = 15.0
+
+[connection signal="button_down" from="Control/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Control/Quit" to="." method="_on_quit_button_down"]
