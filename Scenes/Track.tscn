@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d15fmoioqrobc" path="res://Scripts/track.gd" id="1_7ehuj"]
 [ext_resource type="PackedScene" uid="uid://nxjf3cb7pj2" path="res://Scenes/Car.tscn" id="2_3hn85"]
+[ext_resource type="Script" uid="uid://ct7goa38usn7h" path="res://Scripts/check_points.gd" id="3_iwb3h"]
+[ext_resource type="Script" uid="uid://dg0vq4wd1rai7" path="res://Scripts/timer_ui.gd" id="4_wgxxd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3hn85"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -70,7 +72,7 @@ _data = {
 point_count = 45
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3hn85"]
-size = Vector3(4000, 10, 3000)
+size = Vector3(4156.665, 10, 3000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iwb3h"]
 size = Vector3(50, 20, 5)
@@ -112,12 +114,14 @@ steering_limit = 0.15
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.7494125, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="delete" unique_id=2097594611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.005981, 0, 0)
 shape = SubResource("BoxShape3D_3hn85")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=79167125]
 transform = Transform3D(0.98220867, 0.07135615, -0.17370784, 0, 0.9249976, 0.37997285, 0.18779275, -0.37321264, 0.90854067, 0, 56.60489, 805.25195)
 
 [node name="check_points" type="Node3D" parent="." unique_id=1542535064]
+script = ExtResource("3_iwb3h")
 
 [node name="p1" type="Area3D" parent="check_points" unique_id=1769617133]
 
@@ -126,7 +130,41 @@ transform = Transform3D(0.46002936, 0, 0.8879037, 0, 1, 0, -0.8879037, 0, 0.4600
 shape = SubResource("BoxShape3D_iwb3h")
 
 [node name="timer_ui" type="Node3D" parent="." unique_id=1764845157]
+script = ExtResource("4_wgxxd")
 
 [node name="Timer" type="Timer" parent="timer_ui" unique_id=331006584]
+wait_time = 0.1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="timer_ui" unique_id=1493256052]
+follow_viewport_enabled = true
+
+[node name="StopwatchLabel" type="Label" parent="timer_ui/CanvasLayer" unique_id=989025416]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -558.0
+offset_top = -300.0
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "time"
+
+[node name="pb" type="Label" parent="timer_ui/CanvasLayer" unique_id=2068194884]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -558.0
+offset_top = -286.0
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "no time"
 
 [connection signal="body_entered" from="delete" to="." method="_on_delete_body_entered"]
+[connection signal="area_shape_entered" from="check_points/p1" to="check_points" method="_on_p_1_area_shape_entered"]
