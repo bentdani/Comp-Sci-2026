@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://bnoiqvmb6rqbl"]
 
 [ext_resource type="Script" uid="uid://k1nj5xcv072g" path="res://Scripts/title.gd" id="1_ekrfg"]
-[ext_resource type="AudioStream" uid="uid://b21oohhw0q40o" path="res://Menu Selection Click.wav" id="4_c7ulq"]
+[ext_resource type="FontFile" uid="uid://3ne7luom2i2p" path="res://OleoScript-Bold.ttf" id="2_q2qps"]
+[ext_resource type="StyleBox" uid="uid://b7g8h0hhruyx5" path="res://blueButton.tres" id="3_yosvi"]
+[ext_resource type="StyleBox" uid="uid://bhx5k8v2gb0qa" path="res://blueButtonHover.tres" id="4_2qdx2"]
+
+[sub_resource type="Theme" id="Theme_3eqdi"]
+default_font = ExtResource("2_q2qps")
+
+[sub_resource type="Theme" id="Theme_q2qps"]
+default_font = ExtResource("2_q2qps")
 
 [node name="title" type="Node2D" unique_id=2091736612]
 script = ExtResource("1_ekrfg")
@@ -48,8 +56,9 @@ offset_right = 562.0
 offset_bottom = 244.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_q2qps")
 theme_override_font_sizes/font_size = 135
-text = "Risky Dice"
+text = "Car Game"
 horizontal_alignment = 1
 
 [node name="Play" type="Button" parent="Control" unique_id=1965448372]
@@ -64,7 +73,12 @@ offset_right = 400.0
 offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_3eqdi")
+theme_override_fonts/font = ExtResource("2_q2qps")
 theme_override_font_sizes/font_size = 85
+theme_override_styles/normal = ExtResource("3_yosvi")
+theme_override_styles/pressed = ExtResource("4_2qdx2")
+theme_override_styles/hover = ExtResource("4_2qdx2")
 text = "Play"
 
 [node name="Quit" type="Button" parent="Control" unique_id=1464203269]
@@ -80,12 +94,12 @@ offset_right = 401.0
 offset_bottom = 292.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_q2qps")
+theme_override_fonts/font = ExtResource("2_q2qps")
 theme_override_font_sizes/font_size = 85
+theme_override_styles/normal = ExtResource("3_yosvi")
+theme_override_styles/hover = ExtResource("4_2qdx2")
 text = "Quit"
-
-[node name="Click" type="AudioStreamPlayer2D" parent="." unique_id=185384784]
-stream = ExtResource("4_c7ulq")
-volume_db = 15.0
 
 [connection signal="button_down" from="Control/Play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="Control/Quit" to="." method="_on_quit_button_down"]
