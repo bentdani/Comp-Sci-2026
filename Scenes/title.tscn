@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://k1nj5xcv072g" path="res://Scripts/title.gd" id="1_ekrfg"]
 [ext_resource type="FontFile" uid="uid://3ne7luom2i2p" path="res://OleoScript-Bold.ttf" id="2_q2qps"]
+[ext_resource type="Texture2D" uid="uid://ccrkebnp56dau" path="res://Untitled design.png" id="2_yosvi"]
 [ext_resource type="StyleBox" uid="uid://b7g8h0hhruyx5" path="res://blueButton.tres" id="3_yosvi"]
 [ext_resource type="StyleBox" uid="uid://bhx5k8v2gb0qa" path="res://blueButtonHover.tres" id="4_2qdx2"]
 
@@ -14,10 +15,16 @@ default_font = ExtResource("2_q2qps")
 [node name="title" type="Node2D" unique_id=2091736612]
 script = ExtResource("1_ekrfg")
 
+[node name="UntitledDesign" type="Sprite2D" parent="." unique_id=203999627]
+position = Vector2(570.99994, 329)
+scale = Vector2(0.6041666, 0.60555553)
+texture = ExtResource("2_yosvi")
+
 [node name="Control" type="Control" parent="." unique_id=889251996]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1152.0
+offset_left = -478.0
+offset_right = 674.0
 offset_bottom = 648.0
 
 [node name="TextureRect" type="TextureRect" parent="Control" unique_id=502076443]
