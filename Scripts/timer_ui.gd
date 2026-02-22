@@ -3,6 +3,7 @@ extends Node3D
 var start_time = 0.0
 var elapsed_time = 0.0
 var is_running = false
+var pb: float = 0
 
 func _process(_delta):
 	if is_running == true:
@@ -12,6 +13,11 @@ func _process(_delta):
 			$CanvasLayer/StopwatchLabel.text = "00:00:000"
 		else:
 			$CanvasLayer/StopwatchLabel.text = str(format_time(elapsed_time))
+			
+		if pb == 0:
+			$CanvasLayer/pb.text = "no pb"
+		else:
+			$CanvasLayer/pb.text = str(format_time(pb))
 
 func start_stopwatch():
 	start_time = Time.get_ticks_msec()
@@ -19,6 +25,9 @@ func start_stopwatch():
 
 func stop_stopwatch():
 	is_running = false
+	print(elapsed_time)
+	if pb > elapsed_time or pb == 0:
+		pb = elapsed_time
 
 func format_time(msec: float) -> String:
 	"integer_division"
@@ -27,6 +36,5 @@ func format_time(msec: float) -> String:
 	var minutes = total_seconds / 60
 	var seconds = int(total_seconds) % 60
 	var milliseconds = int(msec) % 1000
-	
-	# Returns format: 01:24.003
+
 	return "%02d:%02d.%03d" % [minutes, seconds, milliseconds]

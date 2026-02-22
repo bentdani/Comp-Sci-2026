@@ -166,5 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "no time"
 
-[connection signal="body_entered" from="delete" to="." method="_on_delete_body_entered"]
-[connection signal="area_shape_entered" from="check_points/p1" to="check_points" method="_on_p_1_area_shape_entered"]
+[connection signal="area_shape_entered" from="delete" to="." method="_on_delete_area_shape_entered"]
+[connection signal="body_shape_entered" from="delete" to="." method="_on_delete_body_shape_entered"]
+[connection signal="body_shape_entered" from="check_points/p1" to="check_points" method="_on_p_1_body_shape_entered"]
+[connection signal="body_shape_exited" from="check_points/p1" to="check_points" method="_on_p_1_body_shape_exited"]
