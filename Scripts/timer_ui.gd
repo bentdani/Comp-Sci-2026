@@ -10,14 +10,14 @@ func _process(_delta):
 		# Calculate time in milliseconds
 		elapsed_time = Time.get_ticks_msec() - start_time
 		if str(format_time(elapsed_time)) == null:
-			$CanvasLayer/StopwatchLabel.text = "00:00:000"
+			$CanvasLayer/StopwatchLabel.text = "Time: 00:00:000"
 		else:
-			$CanvasLayer/StopwatchLabel.text = str(format_time(elapsed_time))
+			$CanvasLayer/StopwatchLabel.text = "Time: " + str(format_time(elapsed_time))
 			
 		if pb == 0:
-			$CanvasLayer/pb.text = "no pb"
+			$CanvasLayer/pb.text = "Best Lap: null"
 		else:
-			$CanvasLayer/pb.text = str(format_time(pb))
+			$CanvasLayer/pb.text = "Best Lap: " + str(format_time(pb))
 
 func start_stopwatch():
 	start_time = Time.get_ticks_msec()
@@ -25,9 +25,17 @@ func start_stopwatch():
 
 func stop_stopwatch():
 	is_running = false
-	print(elapsed_time)
-	if pb > elapsed_time or pb == 0:
-		pb = elapsed_time
+	# ONLY save the PB if the lap was actually finished and time is > 0
+	if elapsed_time > 0.1: 
+		if pb == 0 or elapsed_time < pb:
+			pb = elapsed_time
+			print("New Personal Best: ", pb)
+
+func reset_stopwatch():
+	is_running = false
+	# We DO NOT reset 'pb' here. We only reset the current lap time.
+	elapsed_time = 0.0
+	$CanvasLayer/StopwatchLabel.text = "Time: 00:00.000"
 
 func format_time(msec: float) -> String:
 	"integer_division"
@@ -38,3 +46,9 @@ func format_time(msec: float) -> String:
 	var milliseconds = int(msec) % 1000
 
 	return "%02d:%02d.%03d" % [minutes, seconds, milliseconds]
+	
+
+func _on_delete_body_entered(body: Node3D) -> void:
+	if body.name == "Player_Car":        
+		reset_stopwatch()
+		
