@@ -16,8 +16,7 @@ default_font = ExtResource("2_q2qps")
 script = ExtResource("1_ekrfg")
 
 [node name="UntitledDesign" type="Sprite2D" parent="." unique_id=203999627]
-position = Vector2(570.99994, 329)
-scale = Vector2(0.6041666, 0.60555553)
+position = Vector2(962, 475)
 texture = ExtResource("2_yosvi")
 
 [node name="Control" type="Control" parent="." unique_id=889251996]
@@ -75,9 +74,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 59.0
-offset_right = 400.0
-offset_bottom = 134.0
+offset_left = 1101.0
+offset_top = -303.0
+offset_right = 1442.0
+offset_bottom = -169.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_3eqdi")
@@ -95,10 +95,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 59.0
-offset_top = 158.0
-offset_right = 401.0
-offset_bottom = 292.0
+offset_left = 1101.0
+offset_top = -157.0
+offset_right = 1443.0
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_q2qps")

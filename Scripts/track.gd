@@ -15,3 +15,10 @@ func _on_delete_body_shape_entered(body_rid, body, body_shape_index, local_shape
 		# 2. Kill all momentum
 		body.linear_velocity = Vector3.ZERO
 		body.angular_velocity = Vector3.ZERO
+
+func _process(_delta):
+	# ... keep the timer code that is already here ...
+	
+	# Add this here to update every frame:
+	var kmh = $Player_Car.linear_velocity.length() * 2.0
+	$timer_ui/CanvasLayer/SpeedLabel.text = str(round(kmh)) + " km/h"

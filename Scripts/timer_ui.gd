@@ -4,7 +4,11 @@ var start_time = 0.0
 var elapsed_time = 0.0
 var is_running = false
 var pb: float = 0
+var save_path = "user://racing_stats.cfg"
 
+func _ready() -> void:
+	load_pb()
+	
 func _process(_delta):
 	if is_running == true:
 		# Calculate time in milliseconds
@@ -19,6 +23,22 @@ func _process(_delta):
 		else:
 			$CanvasLayer/pb.text = "Best Lap: " + str(format_time(pb))
 
+func save_pb():
+	var config = ConfigFile.new()
+	# Store the pb value in a section called "Records" under the key "fastest_lap"
+	config.set_value("Records", "fastest_lap", pb)
+	config.save(save_path)
+	print("PB Saved to disk!")
+
+func load_pb():
+	var config = ConfigFile.new()
+	var error = config.load(save_path)
+	
+	# If the file exists, grab the value. If not, keep pb at 0.
+	if error == OK:
+		pb = config.get_value("Records", "fastest_lap", 0.0)
+		print("PB Loaded: ", pb)
+
 func start_stopwatch():
 	start_time = Time.get_ticks_msec()
 	is_running = true
@@ -29,6 +49,7 @@ func stop_stopwatch():
 	if elapsed_time > 0.1: 
 		if pb == 0 or elapsed_time < pb:
 			pb = elapsed_time
+			save_pb()
 			print("New Personal Best: ", pb)
 
 func reset_stopwatch():
