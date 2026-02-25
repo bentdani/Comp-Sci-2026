@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bg0m7nfch4tcj"]
 
-[ext_resource type="Script" uid="uid://cx78xk3umn1nf" path="res://Scripts/track.gd" id="1_7ehuj"]
+[ext_resource type="Script" path="res://Scripts/track.gd" id="1_7ehuj"]
 [ext_resource type="PackedScene" uid="uid://nxjf3cb7pj2" path="res://Scenes/Car.tscn" id="2_3hn85"]
 [ext_resource type="Script" uid="uid://ct7goa38usn7h" path="res://Scripts/check_points.gd" id="3_iwb3h"]
 [ext_resource type="Script" uid="uid://dg0vq4wd1rai7" path="res://Scripts/timer_ui.gd" id="4_wgxxd"]
@@ -179,5 +179,6 @@ text = "0 km/h"
 [connection signal="body_entered" from="delete" to="." method="_on_delete_body_entered"]
 [connection signal="body_entered" from="delete" to="timer_ui" method="_on_delete_body_entered"]
 [connection signal="body_shape_entered" from="delete" to="." method="_on_delete_body_shape_entered"]
+[connection signal="body_shape_entered" from="check_points/p1" to="." method="_on_p_1_body_shape_entered"]
 [connection signal="body_shape_entered" from="check_points/p1" to="check_points" method="_on_p_1_body_shape_entered"]
 [connection signal="body_shape_exited" from="check_points/p1" to="check_points" method="_on_p_1_body_shape_exited"]

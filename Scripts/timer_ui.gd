@@ -8,10 +8,13 @@ var save_path = "user://racing_stats.cfg"
 
 func _ready() -> void:
 	load_pb()
-	
+	if pb == 0:
+		$CanvasLayer/pb.text = "Best Lap: null"
+	else:
+		$CanvasLayer/pb.text = "Best Lap: " + str(format_time(pb))
+			
 func _process(_delta):
 	if is_running == true:
-		# Calculate time in milliseconds
 		elapsed_time = Time.get_ticks_msec() - start_time
 		if str(format_time(elapsed_time)) == null:
 			$CanvasLayer/StopwatchLabel.text = "Time: 00:00:000"
@@ -25,7 +28,6 @@ func _process(_delta):
 
 func save_pb():
 	var config = ConfigFile.new()
-	# Store the pb value in a section called "Records" under the key "fastest_lap"
 	config.set_value("Records", "fastest_lap", pb)
 	config.save(save_path)
 	print("PB Saved to disk!")
@@ -33,8 +35,6 @@ func save_pb():
 func load_pb():
 	var config = ConfigFile.new()
 	var error = config.load(save_path)
-	
-	# If the file exists, grab the value. If not, keep pb at 0.
 	if error == OK:
 		pb = config.get_value("Records", "fastest_lap", 0.0)
 		print("PB Loaded: ", pb)
@@ -45,7 +45,6 @@ func start_stopwatch():
 
 func stop_stopwatch():
 	is_running = false
-	# ONLY save the PB if the lap was actually finished and time is > 0
 	if elapsed_time > 0.1: 
 		if pb == 0 or elapsed_time < pb:
 			pb = elapsed_time
@@ -54,7 +53,6 @@ func stop_stopwatch():
 
 func reset_stopwatch():
 	is_running = false
-	# We DO NOT reset 'pb' here. We only reset the current lap time.
 	elapsed_time = 0.0
 	$CanvasLayer/StopwatchLabel.text = "Time: 00:00.000"
 
@@ -72,4 +70,3 @@ func format_time(msec: float) -> String:
 func _on_delete_body_entered(body: Node3D) -> void:
 	if body.name == "Player_Car":        
 		reset_stopwatch()
-		

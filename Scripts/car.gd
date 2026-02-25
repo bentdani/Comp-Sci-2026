@@ -62,7 +62,7 @@ func _physics_process(delta):
 			var grip_impulse = -side_vel * grip_strength * (mass / 4.0)
 			apply_force(right_dir * grip_impulse, force_pos)
 			
-			# Forward Engine Force
+			# Forward Engine Force 
 			if accel_input != 0:
 				apply_force(forward_dir * accel_input * (engine_force / 4.0), force_pos)
 
