@@ -1,9 +1,9 @@
 extends Node3D
 var intital_pos = Vector3(874.514, 5.702, -356.598)
 var intital_ros = Vector3(0, -119.2, 0)
-var laps = 0
 var title = load("res://Scenes/title.tscn")
-
+var laps = 0
+var can_score = true
 
 func _on_delete_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.name == "Player_Car":
@@ -19,6 +19,7 @@ func _on_delete_body_shape_entered(body_rid, body, body_shape_index, local_shape
 		body.linear_velocity = Vector3.ZERO
 		body.angular_velocity = Vector3.ZERO
 		laps = 0
+		can_score = true
 
 func _process(_delta):
 	# ... keep the timer code that is already here ...
@@ -33,4 +34,14 @@ func _process(_delta):
 		
 
 func _on_p_1_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	laps += 1
+	if body.name == "Player_Car" and can_score == true:
+		laps += 1
+		can_score = false
+	
+func _on_p_1_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	if body.name == "Player_Car":
+		print(laps)
+		
+func _on_checkpoint_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	if body.name == "Player_Car":
+		can_score = true

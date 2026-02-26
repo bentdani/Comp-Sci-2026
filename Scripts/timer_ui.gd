@@ -9,9 +9,9 @@ var save_path = "user://racing_stats.cfg"
 func _ready() -> void:
 	load_pb()
 	if pb == 0:
-		$CanvasLayer/pb.text = "Best Lap: null"
+		$CanvasLayer/pb.text = "Record Lap: null"
 	else:
-		$CanvasLayer/pb.text = "Best Lap: " + str(format_time(pb))
+		$CanvasLayer/pb.text = "Record Lap: " + str(format_time(pb))
 			
 func _process(_delta):
 	if is_running == true:
@@ -22,9 +22,9 @@ func _process(_delta):
 			$CanvasLayer/StopwatchLabel.text = "Time: " + str(format_time(elapsed_time))
 			
 		if pb == 0:
-			$CanvasLayer/pb.text = "Best Lap: null"
+			$CanvasLayer/pb.text = "Record Lap: null"
 		else:
-			$CanvasLayer/pb.text = "Best Lap: " + str(format_time(pb))
+			$CanvasLayer/pb.text = "Record Lap: " + str(format_time(pb))
 
 func save_pb():
 	var config = ConfigFile.new()
