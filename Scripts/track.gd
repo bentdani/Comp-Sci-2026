@@ -27,7 +27,7 @@ func _process(_delta):
 	# Add this here to update every frame:
 	var kmh = $Player_Car.linear_velocity.length() * 2.0
 	$timer_ui/CanvasLayer/SpeedLabel.text = str(round(kmh)) + " km/h"
-	
+	Global.current_lap = laps
 	if laps == 4:
 		get_parent().add_child(title.instantiate())
 		queue_free()
