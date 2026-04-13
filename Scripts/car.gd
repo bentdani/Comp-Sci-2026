@@ -1,5 +1,14 @@
 extends RigidBody3D
 
+var turn_mult = 25
+
+var udp = PacketPeerUDP.new()
+var port = 6767
+
+var turn:float = 0
+var butt:bool = false
+var butt2:bool = false
+
 @export_group("Suspension")
 @export var suspension_rest_dist: float = 0.6
 @export var spring_strength: float = 500.0 # Bumped up for stability
@@ -7,7 +16,7 @@ extends RigidBody3D
 
 @export_group("Driving")
 @export var engine_force: float = 12000.0 # Reduced: applied per wheel
-@export var steering_limit: float = 0.5
+@export var steering_limit: float = 2.0
 @export var grip_strength: float = 15.0  # Increased for snappier response
 @export var downforce: float = 20.0
 
@@ -25,7 +34,23 @@ func _physics_process(delta):
 	var steer_input = Input.get_axis("ui_right", "ui_left")
 
 	# 1. Handle Steering Visuals & Logic
-	var steer_angle = steer_input * steering_limit
+	var steer_angle = turn * steering_limit
+	
+	while udp.get_available_packet_count() > 0:
+		var bytes = udp.get_packet()
+		var data = bytes.decode_float(0)
+		turn = snappedf(data, 0.01)
+		turn = clampf(turn, -1.0, 1.0)
+		turn *= -1
+		
+		butt = bytes[3]
+		butt2 = bytes[4]
+		
+		if abs(turn) <= 0.15:
+			turn = 0.0
+		
+		
+	
 	for p in pivots:
 		p.rotation.y = lerp(p.rotation.y, steer_angle, 0.2)
 
@@ -74,3 +99,9 @@ func _physics_process(delta):
 	var up_dir = global_transform.basis.y
 	var tilt_correction = up_dir.cross(Vector3.UP)
 	apply_torque(tilt_correction * 500.0)
+	
+func _ready() -> void:
+	if udp.bind(port) != OK:
+		print("Error binding to port: ", port)
+		return
+	print("Listening on port ", port)
