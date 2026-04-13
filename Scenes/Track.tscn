@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bg0m7nfch4tcj"]
 
-[ext_resource type="Script" path="res://Scripts/track.gd" id="1_7ehuj"]
+[ext_resource type="Script" uid="uid://g6abkv88w8aq" path="res://Scripts/track.gd" id="1_7ehuj"]
 [ext_resource type="PackedScene" uid="uid://nxjf3cb7pj2" path="res://Scenes/Car.tscn" id="2_3hn85"]
 [ext_resource type="Script" uid="uid://ct7goa38usn7h" path="res://Scripts/check_points.gd" id="3_iwb3h"]
 [ext_resource type="Script" uid="uid://dg0vq4wd1rai7" path="res://Scripts/timer_ui.gd" id="4_wgxxd"]
@@ -154,10 +154,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -919.0
-offset_top = -485.0
-offset_right = -341.0
-offset_bottom = -173.5
+offset_left = -923.0
+offset_top = -491.0
+offset_right = -345.0
+offset_bottom = -179.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Time: 00:00:000"
@@ -176,16 +176,30 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Best Lap: null"
 
+[node name="pb2" type="Label" parent="timer_ui/CanvasLayer" unique_id=1575056658]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -920.0
+offset_top = -416.0
+offset_right = -342.0
+offset_bottom = -118.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Best Time: null"
+
 [node name="Lap_1" type="Label" parent="timer_ui/CanvasLayer" unique_id=878981753]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -919.0
-offset_top = -466.0
-offset_right = -341.0
-offset_bottom = -168.5
+offset_left = -922.0
+offset_top = -473.0
+offset_right = -344.0
+offset_bottom = -175.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Lap 1: Null"
@@ -196,10 +210,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -918.0
-offset_top = -447.0
-offset_right = -340.0
-offset_bottom = -149.5
+offset_left = -921.0
+offset_top = -455.0
+offset_right = -343.0
+offset_bottom = -157.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Lap 2: null"
@@ -210,28 +224,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -918.0
-offset_top = -430.0
-offset_right = -340.0
-offset_bottom = -132.5
+offset_left = -920.0
+offset_top = -435.0
+offset_right = -342.0
+offset_bottom = -137.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Lap 3: null"
-
-[node name="Best_Lap" type="Label" parent="timer_ui/CanvasLayer" unique_id=1143960928]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -919.0
-offset_top = -414.0
-offset_right = -341.0
-offset_bottom = -116.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Best Lap: null
-"
 
 [node name="SpeedLabel" type="Label" parent="timer_ui/CanvasLayer" unique_id=2050230372]
 offset_left = 938.0
