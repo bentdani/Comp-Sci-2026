@@ -11,13 +11,13 @@ var butt2:bool = false
 
 @export_group("Suspension")
 @export var suspension_rest_dist: float = 0.6
-@export var spring_strength: float = 500.0 # Bumped up for stability
+@export var spring_strength: float = 500.0 
 @export var spring_damping: float = 40.0
 
 @export_group("Driving")
-@export var engine_force: float = 12000.0 # Reduced: applied per wheel
+@export var engine_force: float = 12000.0 
 @export var steering_limit: float = 2.0
-@export var grip_strength: float = 15.0  # Increased for snappier response
+@export var grip_strength: float = 15.0  
 @export var downforce: float = 20.0
 
 @onready var rays = [
