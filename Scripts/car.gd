@@ -61,20 +61,15 @@ func _physics_process(delta):
 			var force_pos = ray.get_collision_point() - global_position
 			var ray_dir = -ray.global_transform.basis.y # Gravity direction
 			
-			# Current velocity at the point where the wheel touches ground
 			var point_vel = linear_velocity + angular_velocity.cross(force_pos)
 			
-			# --- 1. SUSPENSION ---
 			var dist = (ray.global_transform.origin - ray.get_collision_point()).length()
 			var spring_depth = suspension_rest_dist - dist
 			var spring_vel = ray_dir.dot(point_vel)
 			var total_spring_force = (spring_depth * spring_strength) - (spring_vel * spring_damping)
 			
-			# Apply upward force
 			apply_force(-ray_dir * total_spring_force, force_pos)
 
-			# --- 2. GRIP & STEERING ---
-			# We need to know which way the wheel is facing
 			var wheel_basis = ray.global_transform.basis
 			if i < 2: # Front wheels rotate
 				wheel_basis = wheel_basis.rotated(Vector3.UP, pivots[0].rotation.y)
@@ -82,12 +77,10 @@ func _physics_process(delta):
 			var forward_dir = -wheel_basis.z
 			var right_dir = wheel_basis.x
 			
-			# Sideways friction (The "Grip")
 			var side_vel = right_dir.dot(point_vel)
 			var grip_impulse = -side_vel * grip_strength * (mass / 4.0)
 			apply_force(right_dir * grip_impulse, force_pos)
 			
-			# Forward Engine Force 
 			if accel_input != 0:
 				apply_force(forward_dir * accel_input * (engine_force / 4.0), force_pos)
 
