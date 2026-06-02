@@ -84,11 +84,8 @@ func _physics_process(delta):
 			if accel_input != 0:
 				apply_force(forward_dir * accel_input * (engine_force / 4.0), force_pos)
 
-	# 3. GLOBAL DOWNFORCE (Keeps it from flying)
 	apply_central_force(Vector3.DOWN * linear_velocity.length() * downforce)
 
-	# 4. ANTI-FLIP (Low Center of Mass)
-	# This force pushes the car upright if it leans too far
 	var up_dir = global_transform.basis.y
 	var tilt_correction = up_dir.cross(Vector3.UP)
 	apply_torque(tilt_correction * 500.0)
