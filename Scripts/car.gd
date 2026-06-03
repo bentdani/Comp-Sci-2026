@@ -33,7 +33,6 @@ func _physics_process(delta):
 	var accel_input = Input.get_axis("ui_down", "ui_up")
 	var steer_input = Input.get_axis("ui_right", "ui_left")
 
-	# 1. Handle Steering Visuals & Logic
 	var steer_angle = turn * steering_limit
 	
 	while udp.get_available_packet_count() > 0:
@@ -54,12 +53,11 @@ func _physics_process(delta):
 	for p in pivots:
 		p.rotation.y = lerp(p.rotation.y, steer_angle, 0.2)
 
-	# 2. Process Each Wheel
 	for i in range(rays.size()):
 		var ray = rays[i]
 		if ray.is_colliding():
 			var force_pos = ray.get_collision_point() - global_position
-			var ray_dir = -ray.global_transform.basis.y # Gravity direction
+			var ray_dir = -ray.global_transform.basis.y 
 			
 			var point_vel = linear_velocity + angular_velocity.cross(force_pos)
 			
@@ -71,7 +69,7 @@ func _physics_process(delta):
 			apply_force(-ray_dir * total_spring_force, force_pos)
 
 			var wheel_basis = ray.global_transform.basis
-			if i < 2: # Front wheels rotate
+			if i < 2:
 				wheel_basis = wheel_basis.rotated(Vector3.UP, pivots[0].rotation.y)
 			
 			var forward_dir = -wheel_basis.z
