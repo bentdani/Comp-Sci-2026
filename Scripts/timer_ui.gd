@@ -50,7 +50,6 @@ func _process(_delta):
 		
 		$CanvasLayer/StopwatchLabel.text = "Time: " + format_time(total_elapsed)
 		
-	# Update the current lap's ticking UI
 		if Current_lap == 1:
 			$CanvasLayer/Lap_1.text = "Lap 1: " + format_time(current_lap_elapsed)
 		elif Current_lap == 2:
@@ -72,17 +71,17 @@ func start_new_lap():
 	elif Current_lap == 2:
 		lap_1_final = now - lap_start_time
 		$CanvasLayer/Lap_1.text = "Lap 1: " + format_time(lap_1_final)
-		check_best_lap(lap_1_final) # <--- CHECK LAP 1
+		check_best_lap(lap_1_final)
 		lap_start_time = now 
 	elif Current_lap == 3:
 		lap_2_final = now - lap_start_time
 		$CanvasLayer/Lap_2.text = "Lap 2: " + format_time(lap_2_final)
-		check_best_lap(lap_2_final) # <--- CHECK LAP 2
+		check_best_lap(lap_2_final) 
 		lap_start_time = now 
 	elif Current_lap == 4:
 		lap_3_final = now - lap_start_time
 		$CanvasLayer/Lap_3.text = "Lap 3: " + format_time(lap_3_final)
-		check_best_lap(lap_3_final) # <--- CHECK LAP 3
+		check_best_lap(lap_3_final)
 		stop_stopwatch()
 
 func stop_stopwatch():
@@ -105,7 +104,6 @@ func save_pb():
 	print("Records Saved to disk!")
 
 func check_best_lap(lap_time: float):
-	# If it's our first time setting a record, OR if the new time is faster
 	if best_lap == 0.0 or lap_time < best_lap:
 		best_lap = lap_time
 		save_pb()
